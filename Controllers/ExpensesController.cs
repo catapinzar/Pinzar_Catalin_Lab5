@@ -22,16 +22,16 @@ namespace Pinzar_Catalin_Lab5.Controllers
 
         // GET: api/Expenses
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Expense>>> GetExpense()
+        public async Task<ActionResult<IEnumerable<ExpenseDTO>>> GetExpense()
         {
-            return await _context.Expense.ToListAsync();
+            return await _context.ExpenseDTO.ToListAsync();
         }
 
         // GET: api/Expenses/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Expense>> GetExpense(int id)
+        public async Task<ActionResult<ExpenseDTO>> GetExpense(int id)
         {
-            var expense = await _context.Expense.FindAsync(id);
+            var expense = await _context.ExpenseDTO.FindAsync(id);
 
             if (expense == null)
             {
@@ -45,7 +45,7 @@ namespace Pinzar_Catalin_Lab5.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutExpense(int id, Expense expense)
+        public async Task<IActionResult> PutExpense(int id, ExpenseDTO expense)
         {
             if (id != expense.Id)
             {
@@ -77,25 +77,25 @@ namespace Pinzar_Catalin_Lab5.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Expense>> PostExpense(Expense expense)
+        public async Task<ActionResult<ExpenseDTO>> PostExpense(ExpenseDTO expense)
         {
-            _context.Expense.Add(expense);
+            _context.ExpenseDTO.Add(expense);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetExpense", new { id = expense.Id }, expense);
+            return CreatedAtAction(nameof(GetExpense), new { id = expense.Id }, expense);
         }
 
         // DELETE: api/Expenses/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Expense>> DeleteExpense(int id)
+        public async Task<ActionResult<ExpenseDTO>> DeleteExpense(int id)
         {
-            var expense = await _context.Expense.FindAsync(id);
+            var expense = await _context.ExpenseDTO.FindAsync(id);
             if (expense == null)
             {
                 return NotFound();
             }
 
-            _context.Expense.Remove(expense);
+            _context.ExpenseDTO.Remove(expense);
             await _context.SaveChangesAsync();
 
             return expense;
@@ -103,7 +103,7 @@ namespace Pinzar_Catalin_Lab5.Controllers
 
         private bool ExpenseExists(int id)
         {
-            return _context.Expense.Any(e => e.Id == id);
+            return _context.ExpenseDTO.Any(e => e.Id == id);
         }
     }
 }

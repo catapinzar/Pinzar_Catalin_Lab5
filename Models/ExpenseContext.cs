@@ -11,7 +11,7 @@ namespace Pinzar_Catalin_Lab5.Models
         public ExpenseContext(DbContextOptions<ExpenseContext> options) : base(options)
         {
         }
-        public DbSet<Expense> Expense { get; set; }
+        public DbSet<ExpenseDTO> ExpenseDTO { get; set; }
 
     }
 }
